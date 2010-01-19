@@ -1,4 +1,4 @@
-package mmi_o2;
+
 
 public class Person {
 	private String name;
