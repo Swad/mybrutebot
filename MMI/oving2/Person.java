@@ -1,8 +1,10 @@
 package oving2;
 
+
 public class Person {
 	private String name;
 	private String dateOfBirth;
+	private Gender gender;
 	
 	private enum Gender {
 		male, female;
@@ -52,6 +54,14 @@ public class Person {
 
 	public String getDateOfBirth() {
 		return dateOfBirth;
+	}
+	
+	public Gender getGender() {
+		return gender;
+	}
+	
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 	
 	public String toString(){
