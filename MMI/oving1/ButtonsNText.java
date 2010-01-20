@@ -1,4 +1,4 @@
-
+package oving1;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,14 +43,24 @@ public class ButtonsNText extends JPanel {
 		add(ContinuousButton);
 	}
 
+	private void toUpperCase() {
+		TextLine.setText(TextLine.getText().toUpperCase());
+		uppercase = true;
+		
+	}
+	
+	private void toLowerCase(){
+		TextLine.setText(TextLine.getText().toLowerCase());
+		uppercase = false;
+	}
 	
 	public class toUpperCase implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			TextLine.setText(TextLine.getText().toUpperCase());
-			uppercase = true;
+			toUpperCase();
+			
 			
 		}
 	}
@@ -59,8 +69,7 @@ public class ButtonsNText extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			TextLine.setText(TextLine.getText().toLowerCase());
-			uppercase = false;
+			toLowerCase();
 			
 		}
 		
@@ -91,7 +100,7 @@ public class ButtonsNText extends JPanel {
 		}
 		@Override
 		public void keyReleased(KeyEvent e) {
-			if (continious) {
+			if (continious || e.getKeyCode() == 10) {
 				if (uppercase) {
 					TextLine.setText(TextLine.getText().toUpperCase());
 				}
@@ -99,6 +108,7 @@ public class ButtonsNText extends JPanel {
 					TextLine.setText(TextLine.getText().toLowerCase());
 				}
 			}
+			
 			
 		}
 
