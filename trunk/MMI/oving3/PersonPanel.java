@@ -1,4 +1,4 @@
-package oving2;
+package oving3;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -7,10 +7,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import javax.swing.*;
 
-public class PersonPanel extends JPanel {
+import oving2.PersonPanel.dropboxListener;
+
+
+public class PersonPanel extends JPanel implements PropertyChangeListener{
 	private JTextField NamePropertyComponent;
 	private JTextField EmailPropertyComponent;
 	private JTextField DateOfBirthPropertyComponent; 
@@ -23,12 +29,13 @@ public class PersonPanel extends JPanel {
 		NamePropertyComponent = new JTextField(); 
 		EmailPropertyComponent = new JTextField();
 		DateOfBirthPropertyComponent = new JTextField(); 
+
 		HeightPropertyComponent = new JSlider(0, 250, 1);
 		HeightPropertyComponent.setMajorTickSpacing(50);
 		HeightPropertyComponent.setMinorTickSpacing(10);
 		HeightPropertyComponent.setPaintTicks(true);
 		HeightPropertyComponent.setPaintLabels(true);
-		HeightPropertyComponent.setValue(150);
+	
 		GenderPropertyComponent = new JComboBox(new Person().toStringArray());
 		
 		JLabel nameLabel = new JLabel("Name:");
@@ -75,25 +82,18 @@ public class PersonPanel extends JPanel {
 		model.setDateOfBirth(DateOfBirthPropertyComponent.getText());
 		model.setHeight(HeightPropertyComponent.getValue());
 		this.model = model;
+		model.addPropertyChangeListener(this);
 		
 		
 	}
 	public Person getModel() {
-//		name.setText(model.getName());
-//		email.setText(model.getEmail());
-//		dateOfBirth.setText(model.getDateOfBirth());
-//		height.setValue(model.getHeight());
+		NamePropertyComponent.setText(model.getName());
+		EmailPropertyComponent.setText(model.getEmail());
+		DateOfBirthPropertyComponent.setText(model.getDateOfBirth());
+		HeightPropertyComponent.setValue(model.getHeight());
 		return model;
 	}
-	public class dropboxListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			setModel(model);
-			
-		}
-		
-	}
+	
 	public class textInputListener implements KeyListener {
 		
 		
@@ -151,6 +151,33 @@ public class PersonPanel extends JPanel {
 		
 	}
 	
+	public void propertyChange(PropertyChangeEvent evt) {
+		String propertyName = evt.getPropertyName();
+		if (propertyName == Person.NAME_PROPERTY) {
+			NamePropertyComponent.setText(model.getName());
+		}
+		else if (propertyName == Person.EMAIL_PROPERTY) {
+			EmailPropertyComponent.setText(model.getEmail());
+		}
+		else if(propertyName == Person.GENDER_PROPERTY) {
+			GenderPropertyComponent.setSelectedItem(model.getGender());
+		}
+		else if (propertyName == Person.HEIGHT_PROPERTY) {
+			HeightPropertyComponent.setValue(model.getHeight()); 
+		}
+		else if (propertyName == Person.DATEOFBIRTH_PROPERTY) {
+			DateOfBirthPropertyComponent.setText(model.getName());
+		}
+	}
+	
+	public class dropboxListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setModel(model);
+			
+		}
+	}
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		PersonPanel panel = new PersonPanel();
@@ -161,8 +188,6 @@ public class PersonPanel extends JPanel {
 		panel.setModel(model);
 		
 	}
-
-
 
 	
 }
