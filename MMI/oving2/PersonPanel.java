@@ -79,10 +79,10 @@ public class PersonPanel extends JPanel {
 		
 	}
 	public Person getModel() {
-		name.setText(model.getName());
-		email.setText(model.getEmail());
-		dateOfBirth.setText(model.getDateOfBirth());
-		height.setValue(model.getHeight());
+//		name.setText(model.getName());
+//		email.setText(model.getEmail());
+//		dateOfBirth.setText(model.getDateOfBirth());
+//		height.setValue(model.getHeight());
 		return model;
 	}
 	
