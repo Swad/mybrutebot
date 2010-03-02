@@ -20,7 +20,7 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 	private JTextField NamePropertyComponent, EmailPropertyComponent, DateOfBirthPropertyComponent;
 	private JComboBox GenderPropertyComponent;
 	private JSlider HeightPropertyComponent;
-	private Person model = new Person();
+	private Person model;
 	
 	public PersonPanel(){
 				
@@ -93,14 +93,10 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 		model.setEmail(EmailPropertyComponent.getText());
 		model.setHeight(HeightPropertyComponent.getValue());
 		model.setDateOfBirth(DateOfBirthPropertyComponent.getText());
-		model.setGender(getGender());
+//		model.setGender(getGender());
 		this.model = model;
-		model.addPropertyChangeListener(this);
-		System.out.println(model.getName());
-		System.out.println(model.getEmail());
-		System.out.println(model.getHeight());
-		System.out.println(model.getDateOfBirth());
-		System.out.println(model.getGender());
+//		model.addPropertyChangeListener(this);
+
 	}
 	
 	public Person getModel(){
@@ -112,6 +108,11 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 		else GenderPropertyComponent.setSelectedItem(Gender.female);
 		
 		return model;
+	}
+
+	public void setPersonAsModel(Person person) {
+		model = person;
+//		model.addPropertyChangeListener(this);
 	}
 	
 	public class TextLineListener implements KeyListener{
@@ -131,7 +132,7 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 	public class DropboxListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			setModel(model);
+			model.setGender(getGender());
 		}
 		
 	}
@@ -139,7 +140,7 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 	public class SliderListener implements ChangeListener{
 
 		public void stateChanged(ChangeEvent e) {
-			setModel(model);
+			model.setHeight(HeightPropertyComponent.getValue());
 		}
 		
 	}
@@ -177,8 +178,13 @@ public class PersonPanel extends JPanel implements PropertyChangeListener {
 		
 		
 		
-		
-		
+	}
+	public void setAsEnabled(boolean value) {
+		NamePropertyComponent.setEnabled(value);
+		DateOfBirthPropertyComponent.setEnabled(value);
+		EmailPropertyComponent.setEnabled(value);
+		HeightPropertyComponent.setEnabled(value);
+		GenderPropertyComponent.setEnabled(value);
 	}
 
 }
