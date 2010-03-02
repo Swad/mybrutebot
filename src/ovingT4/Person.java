@@ -18,10 +18,16 @@ public class Person {
 	
 	public Person(){
 		this.pcs = new PropertyChangeSupport(this);
+		name = dateOfBirth = email ="";
+		height = 150;
+		gender = Gender.male;
 	}
 	
 	public Person(String name){
 		this.name = name;
+		name = dateOfBirth = email ="";
+		height = 150;
+		gender = Gender.male;
 	}
 	
 	public String getDateOfBirth() {
@@ -30,7 +36,7 @@ public class Person {
 	public void setDateOfBirth(String dateOfBirth) {
 		String oldDate = this.dateOfBirth;
 		this.dateOfBirth = dateOfBirth;
-		pcs.firePropertyChange(NAME, oldDate, dateOfBirth);
+//		pcs.firePropertyChange(NAME, oldDate, dateOfBirth);
 		
 	}
 	public String getEmail() {
@@ -39,7 +45,7 @@ public class Person {
 	public void setEmail(String email) {
 		String oldMail = this.email;
 		this.email = email;
-		pcs.firePropertyChange(MAIL, oldMail, email);
+//		pcs.firePropertyChange(MAIL, oldMail, email);
 	}
 	public int getHeight() {
 		return height;
@@ -47,7 +53,8 @@ public class Person {
 	public void setHeight(int height) {
 		int oldHeight = this.height;
 		this.height = height;
-		pcs.firePropertyChange(HEIGHT, oldHeight, height);
+//		pcs.firePropertyChange(HEIGHT, oldHeight, height);
+		System.out.println(height);
 		
 	}
 	public String getName() {
@@ -56,13 +63,14 @@ public class Person {
 	public void setName(String name) {
 		String oldName = this.name;
 		this.name = name;
-		pcs.firePropertyChange(NAME, oldName, name);
+//		pcs.firePropertyChange(NAME, oldName, name);
 	}
 	
 	public void setGender(Gender gender){
 		Gender oldGender = this.gender;
 		this.gender = gender;
-		pcs.firePropertyChange(GENDER, oldGender, gender);
+//		pcs.firePropertyChange(GENDER, oldGender, gender);
+		System.out.println(gender);
 	}
 	
 	public Gender getGender(){
